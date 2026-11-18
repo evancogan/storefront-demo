@@ -1,6 +1,6 @@
-# React Demo Template
+# Storefront Demo
 
-The starting point for my React + TypeScript demo projects. Every new demo (an online storefront, a business landing page, an admin dashboard) is created from this repo, so it starts with the same setup, checks and workflow from its first commit.
+An online storefront demo built with React and TypeScript. It was created from `react-demo-template`, so it starts with the same setup, checks and agent workflow.
 
 ## How changes get in
 
@@ -11,8 +11,8 @@ The starting point for my React + TypeScript demo projects. Every new demo (an o
 
 ## Status
 
-The app skeleton, CI, and the agent workflow (templates, AGENTS.md, decision records, run log, agent account) are all done now. The next step is building the three demo apps from this template.
+The repo was just created from the template. The app is still Vite's starter page. The next step is replacing it with the storefront.
 
 ## Agent workspace
 
-This repo is cloned into the agent's VM at `C:\Repos\react-demo-template` as its workspace. The repo owner does not work in that clone directly; all changes are made through pull requests.
+Agents work in their own clone as `evancogan-agent`, currently a GitHub Codespace. The repo owner reviews and merges every change through pull requests.

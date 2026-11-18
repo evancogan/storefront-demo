@@ -9,8 +9,8 @@ Read the issue with the GitHub tool `issue_read`. Take the owner and repo from
 
 ## Project
 
-A React + TypeScript template, built with Vite and tested with Vitest. Every
-demo project starts from this repo.
+An online storefront demo in React + TypeScript, built with Vite and tested
+with Vitest. It was created from `react-demo-template`.
 
 ## Commands
 
