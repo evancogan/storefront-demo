@@ -24,8 +24,7 @@ with Vitest. It was created from `react-demo-template`.
 - Work on one issue at a time, on a branch named `issue-<number>`. Never
   commit to `main`.
 - Only change the files listed in the issue's "Where" section.
-- Never edit or delete a test to make it pass. If a test looks wrong, stop and
-  say so.
+- Only change a test if the issue's "Where" lists the test file and says which tests change and why. Never edit or delete a test just to make it pass. If a test looks wrong and the issue doesn't cover it, stop and say so.
 - Don't add, remove or upgrade packages unless the issue asks for it.
 - TypeScript stays on version 6 (ADR 0001).
 - Templates are read-only. Copy `.github/pull_request_template.md` into the
