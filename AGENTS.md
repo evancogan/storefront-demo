@@ -35,6 +35,10 @@ with Vitest. It was created from `react-demo-template`.
 - In the pull request's description, fill in every section and follow the
   checklist rule. Say plainly what you didn't finish or couldn't verify.
 - When the change is done, commit it, push the branch and open a pull request.
+- If the diff changes more than 100 lines, not counting `package-lock.json` or
+  Markdown files, run `/code-review` before opening the pull request. Fix what
+  it finds, or say in the description why you didn't, and list its findings
+  under "What changed".
 - Never force-push. If a push is rejected, stop and say so.
 - Never merge a pull request. A human merges after review.
 - Only work on issues labeled `ready`. If an issue isn't labeled `ready`,

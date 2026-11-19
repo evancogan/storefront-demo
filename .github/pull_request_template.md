@@ -14,4 +14,5 @@ Tick only what you verified. If you leave an item unticked, put the reason in pa
 - [ ] Only files in the issue's "Where" changed (lock file changes only if packages changed)
 - [ ] The summary above matches the diff
 - [ ] Tests cover the change, and no test was edited just to make it pass
+- [ ] `/code-review` ran and its findings are listed above (required over 100 changed lines, not counting `package-lock.json` or Markdown)
 - [ ] `npm run check` passes locally
