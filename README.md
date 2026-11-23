@@ -21,11 +21,11 @@ Tests that are real do. CI runs `npm test` on every PR, and `AGENTS.md` requires
 
 _Can the new tests themselves be tested?_
 
-They can, this is actually the primary goal of mutation testing. "Who tests the testers?" asks us who is checking and ensuring the tests are actually testing? This is even more important than ever in a post-AI computer science field. (Society of Research Software Engineering, 2025) Fail-before, pass-after runs the new tests against `main`'s code, where they should fail, then against the pull request's code. It is weak for new files, because the tests fail only because the code is missing
+They can, this is actually the primary goal of mutation testing. "Who tests the testers?" asks us who is checking and ensuring the tests are actually testing? This is even more important than ever in a post-AI computer science field. (Society of Research Software Engineering, 2025) Fail-before, pass-after runs the new tests against `main`'s code, where they should fail, then against the pull request's code. It is weak for new files, because the tests fail only because the code is missing.
 
 _What is mutation testing?_
 
-Mutation testing changes the code in small ways to check if a test fails for each change. The changes are small, one-at-a-time source changes such as `+` to `-`, `>` to `>=`, `true` to `false` or a number to `0`, and runs the tests for each. The altered tests are called **mutants** and it's a good thing to check for them and have them removed.
+Mutation testing changes the code in small ways to check if a test fails for each change. The changes are small, one-at-a-time source changes such as `+` to `-`, `>` to `>=`, `true` to `false` or a number to `0`, and the tool runs the tests for each. Each altered copy of the code is called a **mutant**. If a test fails, the mutant is killed, which is good. If every test passes, the mutant survived, which points at a weak test. The mutation score is killed mutants divided by total mutants. Some mutants change nothing observable (equivalent mutants) and always survive, so the threshold stays below 100%.
 
 _What is Stryker?_
 
