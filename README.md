@@ -9,44 +9,37 @@ An online storefront demo built with React and TypeScript. It was created from `
 - CI runs lint, tests and a build on every pull request. Nothing merges unless it passes.
 - I read every diff before merging, whether I wrote it or an AI agent did.
 
-## Status
-
-The repo was just created from the template. The app is still Vite's starter page. The next step is replacing it with the storefront.
-
-## Agent workspace
-
-Agents work in their own clone as `evancogan-agent`, currently a GitHub Codespace. The repo owner reviews and merges every change through pull requests.
-
-## What we learned
+# What I've learned
 
 These are questions asked while learning about mutation testing, with the answers given at the time. The answers come from general knowledge of Stryker, not from its current docs or a trial run, so check them before relying on them.
 
-### Questions and answers
+## Questions and answers
 
-**Do the tests in a pull request have to pass in CI, and is writing them enforced?**
+_Do the tests in a pull request have to pass in CI, and is writing them enforced?_
 
-Tests that exist must pass: CI runs `npm test` on every pull request, `AGENTS.md` requires `npm run check` to pass, and every issue lists "CI passes". Writing tests is not enforced: a pull request with no tests still passes CI, and only the "Tests cover the change" checklist item covers it, which is self-reported.
+Tests that are real do. CI runs `npm test` on every PR, and `AGENTS.md` requires `npm run check` to pass. Every issue is to list that CI passes. Writing tests is not enforced. A PR with no tests can still pass on CI, and the "tests cover the change" checklist item is self-reported.
 
-**Can the new tests themselves be tested?**
+_Can the new tests themselves be tested?_
 
-Yes, in two ways. Fail-before, pass-after runs the new tests against `main`'s code, where they should fail, then against the pull request's code. It is weak for new files, because the tests fail only because the code is missing. Mutation testing changes the code in small ways and checks that a test fails for each change. It works for new files, so it fits this repo better.
+They can, this is actually the primary goal of mutation testing. "Who tests the testers?" asks us who is checking and ensuring the tests are actually testing? This is even more important than ever in a post-AI computer science field. (Society of Research Software Engineering, 2025) Fail-before, pass-after runs the new tests against `main`'s code, where they should fail, then against the pull request's code. It is weak for new files, because the tests fail only because the code is missing.
 
-**What is mutation testing?**
+_What is mutation testing?_
 
-A tool makes one small change at a time to the source, such as `+` to `-`, `>` to `>=`, `true` to `false` or a number to `0`, and runs the tests for each. If a test fails, the mutant is killed, which is good. If every test passes, the mutant survived, which points at a weak test. The mutation score is killed mutants divided by total mutants. Some mutants change nothing observable (equivalent mutants) and always survive, so the threshold stays below 100%. It checks that tests catch breaks in the code, not that the code does what the issue asked.
+Mutation testing changes the code in small ways to check if a test fails for each change. The changes are small, one-at-a-time source changes such as `+` to `-`, `>` to `>=`, `true` to `false` or a number to `0`, and the tool runs the tests for each. Each altered copy of the code is called a **mutant**. If a test fails, the mutant is killed, which is good. If every test passes, the mutant survived, which points at a weak test. The mutation score is killed mutants divided by total mutants. Some mutants change nothing observable (equivalent mutants) and always survive, so the threshold stays below 100%.
 
-**What is Stryker?**
+_What is Stryker?_
 
 The best-known open-source mutation testing tool for JavaScript and TypeScript (StrykerJS, packages under `@stryker-mutator/`). The core package generates mutants and reports results. A test runner plugin, `@stryker-mutator/vitest-runner` for us, runs the tests for each mutant. It prints a terminal summary, can write an HTML report that shows each survivor as a diff, takes a small config file, and has an incremental mode that reruns only the mutants affected by changed code. Whether current versions work with Vitest 5 and TypeScript 6 has not been checked.
 
-**How do we adopt it?**
-
-Trial first, on a throwaway branch: install `@stryker-mutator/core` and `@stryker-mutator/vitest-runner`, write a `stryker.config.json` that mutates `src/**/*.ts(x)` without test files, `setupTests.ts` or `main.tsx`, and run `npx stryker run`. Look at compatibility, run time, score, survivors and incremental mode. Then adopt it through small issues: add the packages and config, add a CI workflow that runs on changed files, make the check required in GitHub settings, and move ADR 0014 to `Accepted`.
-
-**How is mutation testing different from TDD?**
+_How is mutation testing different from TDD?_
 
 Both prove a test can fail, but they break different things at different times. In red to green, you write a test first and watch it fail because the code doesn't exist yet, then write the code that turns it green. The test stays as written and the code changes. In mutation testing the order is green, red, green: the code and tests already pass, the tool breaks the code (not the test) in a small way, the test should go red, and the tool restores the code. So it isn't breaking the new test; it is breaking the code the test is supposed to protect. TDD is a habit the author follows once per behavior, and nothing enforces it. Mutation testing is automatic, runs after the fact, and tries many variations of every line. It catches tests that were red for the wrong reason, and code added after the test went green that nothing checks. They work together. Neither checks that the code does what the issue asked.
 
-### Findings
+# Findings
 
 <!-- Findings from trying mutation testing (ADR 0014) go here. -->
+
+# Citations and Further Resources
+
+Society of Research Software Engineering. (2025, February 24). Mutation testing: Who tests the testers? [Video]. YouTube. https://www.youtube.com/watch?v=uoxT2pRenQs
+‌
