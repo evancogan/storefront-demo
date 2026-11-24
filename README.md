@@ -1,5 +1,7 @@
 # Storefront Demo
 
+![React](https://img.shields.io/badge/React-TypeScript-61DAFB?logo=react&logoColor=black)
+
 [![CI](https://github.com/evancogan/storefront-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/evancogan/storefront-demo/actions/workflows/ci.yml)
 
 An online storefront demo built with React and TypeScript. It was created from `react-demo-template`, so it starts with the same setup, checks and agent workflow.
