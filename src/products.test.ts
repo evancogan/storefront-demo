@@ -19,3 +19,9 @@ test('every price is a positive whole number of cents', () => {
     expect(product.priceCents).toBeGreaterThan(0);
   }
 });
+
+test('every product has a non-empty id', () => {
+  for (const product of products) {
+    expect(product.id).not.toBe('');
+  }
+});
