@@ -41,7 +41,7 @@ Both prove a test can fail, but they break different things at different times. 
 
 # Findings
 
-These findings come from a local trial of Stryker on the owner's laptop. The trial branch (`stryker-trial`) was not pushed, so nothing from it is in the repo.
+These findings come from a local trial of Stryker. The trial branch (`stryker-trial`) was not pushed, so nothing from it is in the repo.
 
 - Stryker works with Vitest 5 and TypeScript 6. The TypeScript checker needs `tsconfigFile` set to `tsconfig.app.json`.
 - Run 1 (no checker): 28 mutants, a score of 88%, about 50 seconds.
