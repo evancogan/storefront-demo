@@ -46,13 +46,13 @@ These findings come from a local trial of Stryker. The trial branch (`stryker-tr
 - Stryker works with Vitest 5 and TypeScript 6. The TypeScript checker needs `tsconfigFile` set to `tsconfig.app.json`.
 - Run 1 (no checker): 28 mutants, a score of 88%, about 50 seconds.
 - Run 2 (with the checker): 9 mutants were compile errors, the score was about 84%, and it took about 2 minutes.
-- Both runs had the same 3 survivors: an empty `id` for `tote`, for `notebook` and for `bottle`. Issue #19 proposes a test that would close this gap. It is not merged yet.
+- Both runs had the same 3 survivors: an empty `id` for `tote`, for `notebook` and for `bottle`. The test that closes this gap, "every product has a non-empty id", was added after the trial (#19, #29).
 - `ProductCard.tsx` was not scored with the checker on, because its only mutant was a compile error. Stryker's "no coverage" count was 0.
 - 21 of the 28 mutants were static: 17 in `products.ts` and 4 in `formatPrice.ts`. All 3 survivors were flagged static in both reports, so turning on `ignoreStatic` would have hidden the only real finding. It should stay off.
 - No mutants were generated for `priceCents`.
 - `npm audit` found 9 moderate issues after `npm ci` and before any Stryker package. It found 13 after installing `@stryker-mutator/core` and `@stryker-mutator/vitest-runner`, and 14 after adding `@stryker-mutator/typescript-checker`. All are in dev dependencies.
 
-One decision is still open: whether the pull request check gates on a score threshold or only surfaces the surviving mutants.
+Decision: the check will fail when the mutation score drops below a threshold, starting at 90%, and it will run as part of `npm run check` in Stryker's incremental mode. A scratch run after the trial confirmed that an incremental run reports the full score and exits with code 1 below the threshold. See ADR 0014. The number can change later in a new ADR.
 
 # Citations and Further Resources
 
