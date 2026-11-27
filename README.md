@@ -41,7 +41,18 @@ Both prove a test can fail, but they break different things at different times. 
 
 # Findings
 
-<!-- Findings from trying mutation testing (ADR 0014) go here. -->
+These findings come from a local trial of Stryker on my laptop. The trial branch (`stryker-trial`) was not pushed, so nothing from it is in the repo.
+
+- Stryker works with Vitest 5 and TypeScript 6. The TypeScript checker needs `tsconfigFile` set to `tsconfig.app.json`.
+- Run 1 (no checker): 28 mutants, a score of 88%, about 50 seconds.
+- Run 2 (with the checker): 9 mutants were compile errors, the score was about 84%, and it took about 2 minutes.
+- Both runs had the same 3 survivors: an empty `id` for `tote`, for `notebook` and for `bottle`. Issue #19 proposes a test that would close this gap. It is not merged yet.
+- `ProductCard.tsx` was not scored with the checker on, because its only mutant was a compile error.
+- 21 of the 28 mutants were static: 17 in `products.ts` and 4 in `formatPrice.ts`. All 3 survivors were flagged static in both reports, so turning on `ignoreStatic` would have hidden the only real finding. It should stay off.
+- No mutants were generated for `priceCents`.
+- `npm audit` found 9 moderate issues after `npm ci` and before any Stryker package. It found 13 after installing `@stryker-mutator/core` and `@stryker-mutator/vitest-runner`, and 14 after adding `@stryker-mutator/typescript-checker`. All are in dev dependencies.
+
+One decision is still open: whether the pull request check gates on a score threshold or only surfaces the surviving mutants.
 
 # Citations and Further Resources
 
