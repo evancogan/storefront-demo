@@ -1,7 +1,7 @@
 # 14. Check new tests with mutation testing
 
 Date: 2026-11-19
-Status: Proposed
+Status: Accepted
 
 ## Context
 
